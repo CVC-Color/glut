@@ -221,14 +221,11 @@ Hope you like it 🤗
 If you find this work interesting or you use it, don't forget to cite our work:
 
 ```bibtex
-@misc{xue2026glut,
-  title         = {GLUT: 3D Gaussian Lookup Table for Continuous Color Transformation},
-  author        = {Danna Xue and David Serrano-Lozano and Shaolin Su and Javier Vazquez-Corral},
-  year          = {2026},
-  eprint        = {2605.19889},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.GR},
-  url           = {https://arxiv.org/abs/2605.19889}
+@article{xue2026glut,
+  title={GLUT: 3D Gaussian Lookup Table for Continuous Color Transformation},
+  author={Xue, Danna and Serrano-Lozano, David and Su, Shaolin and Vazquez-Corral, Javier},
+  journal={arXiv preprint arXiv:2605.19889},
+  year={2026}
 }
 ```
 
