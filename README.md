@@ -8,7 +8,6 @@
 
 Computer Vision Center, Universitat Autònoma de Barcelona
 
-
 ## About
 
 **Gaussian LUT (GLUT)** is a compact, continuous color representation based on learnable 3D Gaussian primitives. It avoids fixed-resolution grids while providing high accuracy, interpretability, and direct local editing.
@@ -223,7 +222,7 @@ If you find this work interesting or you use it, don't forget to cite our work:
 
 ```bibtex
 @misc{xue2026glut,
-  title         = {{GLUT}: {3D} {Gaussian} Lookup Table for Continuous Color Transformation},
+  title         = {GLUT: 3D Gaussian Lookup Table for Continuous Color Transformation},
   author        = {Danna Xue and David Serrano-Lozano and Shaolin Su and Javier Vazquez-Corral},
   year          = {2026},
   eprint        = {2605.19889},
