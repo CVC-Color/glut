@@ -1,7 +1,8 @@
 # GLUT: 3D Gaussian Lookup Table for Continuous Color Transformation
 
-[![arXiv](https://img.shields.io/badge/ArXiv-Paper-B31B1B)](https://arxiv.org/abs/2605.19889)
-[![web](https://img.shields.io/badge/Project-Page-orange)](https://color.cvc.uab.cat/glut/)
+
+[arXiv](https://arxiv.org/abs/2605.19889) &nbsp;|&nbsp; [Project Page](https://color.cvc.uab.cat/glut/) &nbsp;|&nbsp; [LUT editor 🎨](https://color.cvc.uab.cat/assets/html/glut_editor.html)
+
 
 ### Neurips 2026
 [Danna Xue](https://dxue321.github.io/), [David Serrano-Lozano](https://davidserra9.github.io/), [Shaolin Su](https://ssl92.github.io/), and [Javier Vazquez-Corral](https://www.jvazquez-corral.net/)
@@ -17,20 +18,16 @@ Computer Vision Center, Universitat Autònoma de Barcelona
 
 GLUT also supports efficient, user-friendly **LUT editing**, allowing localized adjustments to specific color regions without global retraining. 
 
-
+<video src="assets/demo.mp4" controls width="720"></video>
 
 ## Code overview
-
-Fit a 3D colour LUT with a small mixture of 3D Gaussians in the RGB cube. Each Gaussian owns a centre, a full covariance, an opacity and a local affine colour transform; an input colour is transformed by blending the local transforms with opacity‑weighted Gaussian responses, on top of a global affine transform.
 
 | Script | What it does |
 |---|---|
 | `train_glut.py`  | **GLUT** – fit **one** LUT (a single input/target hald‑image pair). |
 | `train_cglut.py` | **CGLUT** – fit **many** LUTs with one conditional model (a learned per‑LUT embedding drives an MLP that generates the Gaussian parameters). |
-| `blend_lut.py`   | Interpolate two LUTs on one image with a trained CGLUT (interpolate the two condition embeddings); optionally compare against the linear‑blend reference. |
-| `interactive_glut_editor.py` | GUI to locally edit a fitted GLUT by nudging the top‑k Gaussians. |
-| `test_image.py`  | Batch-evaluate GLUT/CGLUT checkpoints against the reference `.cube` LUTs on a folder of real images (PSNR / ΔE00 / ΔE76, CSV + optional comparison images). |
-
+| `blend_lut.py`   | Interpolate two LUTs on one image with a trained CGLUT (interpolate the two condition embeddings). |
+| `interactive_glut_editor.py` | GUI to locally edit a fitted GLUT by modifying the top‑k Gaussians. |
 
 
 ## 1. Environment
@@ -222,14 +219,11 @@ Hope you like it 🤗
 If you find this work interesting or you use it, don't forget to cite our work:
 
 ```bibtex
-@misc{xue2026glut,
-  title         = {{GLUT}: {3D} {Gaussian} Lookup Table for Continuous Color Transformation},
-  author        = {Danna Xue and David Serrano-Lozano and Shaolin Su and Javier Vazquez-Corral},
-  year          = {2026},
-  eprint        = {2605.19889},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.GR},
-  url           = {https://arxiv.org/abs/2605.19889}
+@article{xue2026glut,
+  title={GLUT: 3D Gaussian Lookup Table for Continuous Color Transformation},
+  author={Xue, Danna and Serrano-Lozano, David and Su, Shaolin and Vazquez-Corral, Javier},
+  journal={arXiv preprint arXiv:2605.19889},
+  year={2026}
 }
 ```
 
