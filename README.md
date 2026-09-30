@@ -13,9 +13,7 @@ Computer Vision Center, Universitat Autònoma de Barcelona
 
 **Gaussian LUT (GLUT)** is a compact, continuous color representation based on learnable 3D Gaussian primitives. It avoids fixed-resolution grids while providing high accuracy, interpretability, and direct local editing.
 
-**Conditional GLUT (CGLUT)** further extends GLUT to represent multiple color styles within a single model, enabling smooth and controllable style blending.
-
-GLUT also supports efficient, user-friendly **LUT editing**, allowing localized adjustments to specific color regions without global retraining. 
+https://github.com/user-attachments/assets/c551537a-e170-4d2f-9686-0c8cc2b273b0
 
 
 ## Code overview
