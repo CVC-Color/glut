@@ -1,7 +1,7 @@
 # GLUT: 3D Gaussian Lookup Table for Continuous Color Transformation
 
 
-[arXiv](https://arxiv.org/abs/2605.19889) &nbsp;|&nbsp; [Project Page](https://color.cvc.uab.cat/glut/) &nbsp;|&nbsp; [LUT editor 🎨](https://color.cvc.uab.cat/assets/html/glut_editor.html)
+[arXiv](https://arxiv.org/abs/2605.19889) &nbsp;|&nbsp; [Project Page](https://color.cvc.uab.cat/glut/) &nbsp;|&nbsp; [LUT editor](https://color.cvc.uab.cat/assets/html/glut_editor.html) 🎨
 
 
 ### Neurips 2026
@@ -17,7 +17,7 @@ Computer Vision Center, Universitat Autònoma de Barcelona
 
 GLUT also supports efficient, user-friendly **LUT editing**, allowing localized adjustments to specific color regions without global retraining. 
 
-<video src="assets/demo.mp4" controls width="720"></video>
+[![Demo](assets/start.gif)](assets/demo.mp4)
 
 ## Code overview
 
