@@ -17,7 +17,6 @@ Computer Vision Center, Universitat Autònoma de Barcelona
 
 GLUT also supports efficient, user-friendly **LUT editing**, allowing localized adjustments to specific color regions without global retraining. 
 
-[![Demo](assets/start.gif)](assets/glut_video.mp4)
 
 ## Code overview
 
