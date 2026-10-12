@@ -14,10 +14,6 @@ Key options:
       mini-batches are drawn by ``torch.randperm`` indexing.  This removes the
       per-step DataLoader / worker / host->device overhead (~2x faster training
       loop for this tiny model).
-    * Large-batch compensation (``--ref_batch_size`` / ``--no_batch_compensation``):
-      when ``batch_size`` exceeds the reference batch size, epochs are scaled up
-      to keep the optimiser-step budget constant and the lr is scaled by
-      ``sqrt(batch/ref)``.
     * ``--cuda_eval``: route the evaluation forward pass through the fused CUDA
       kernel ``glut_cuda.glut.glut_forward`` (inference only; requires a GPU and
       the compiled extension).  Numerically equivalent up to float32 rounding.
@@ -619,34 +615,15 @@ def main(args):
 
     trainer = GLUTTrainer(model)
 
-    # 3. Large-batch compensation (relative to --ref_batch_size).
-    #    num_epochs / learning_rate are assumed to be tuned at ref_batch_size.
-    #    When batch_size > ref_batch_size and compensation is enabled:
-    #      * epochs are scaled by batch/ref, so the total number of optimiser
-    #        steps matches the reference budget;
-    #      * lr is scaled by sqrt(batch/ref) (the sqrt rule works well for Adam).
-    #    batch_size <= ref_batch_size leaves everything untouched.
-    scale = args.batch_size / args.ref_batch_size
-    if (not args.no_batch_compensation) and scale > 1.0:
-        num_epochs_eff = max(1, int(round(args.num_epochs * scale)))
-        lr_eff = args.learning_rate * math.sqrt(scale)
-        logger.info("[Batch compensation] batch={} vs ref={} (x{:g}): "
-                    "epochs {} -> {}, lr {:.2e} -> {:.2e}".format(
-                        args.batch_size, args.ref_batch_size, scale,
-                        args.num_epochs, num_epochs_eff, args.learning_rate, lr_eff))
-    else:
-        num_epochs_eff = args.num_epochs
-        lr_eff = args.learning_rate
-
     steps_per_epoch = math.ceil(n_train / args.batch_size)
-    total_steps = num_epochs_eff * steps_per_epoch
+    total_steps = args.num_epochs * steps_per_epoch
 
-    # 4. Optimizer / scheduler / curriculum hard-example mining.
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr_eff)
+    # 3. Optimizer / scheduler / curriculum hard-example mining.
+    optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=total_steps)
 
     curriculum_miner = CurriculumHardMining(
-        total_epochs=num_epochs_eff,
+        total_epochs=args.num_epochs,
         warmup_epochs=3,
         mining_start_epoch=5,
         initial_mining_ratio=0.1,
@@ -661,7 +638,7 @@ def main(args):
     train_losses = []
     iteration = 0
 
-    for epoch in range(num_epochs_eff):
+    for epoch in range(args.num_epochs):
         model.train()
         # Shuffle by indexing the GPU-resident tensors (replaces DataLoader shuffle).
         perm = torch.randperm(n_train, device=device)
@@ -697,7 +674,7 @@ def main(args):
                             f"lab {losses['lab_loss']:.6f} | "
                             f"sparse {losses['sparse_loss']:.6f}")
 
-        if (epoch + 1) % args.eval_interval == 0 or (epoch + 1) == num_epochs_eff:
+        if (epoch + 1) % args.eval_interval == 0 or (epoch + 1) == args.num_epochs:
             logger.info("4. Evaluating model performance...")
             logger.info("-" * 60)
             l1_error_total, max_error_total, mse_total = 0.0, 0.0, 0.0
@@ -749,7 +726,7 @@ def main(args):
         os.path.join(args.save_dir,
                      f'GLUT_{lut_name}_{args.num_gaussians}_psnr{average_psnr:.2f}'
                      f'_dE{average_deltaE76:.4f}.pth'),
-        num_epochs_eff)
+        args.num_epochs)
     logger.info(f"Final model saved to {lut_name}")
 
     return model, trainer
@@ -777,15 +754,8 @@ if __name__ == "__main__":
 
     parser.add_argument("--batch_size", help="Batch size for training", default=4096, type=int)
     parser.add_argument("--batch_size_val", help="Batch size for evaluation", default=10000, type=int)
-    parser.add_argument("--num_epochs", help="Number of training epochs (calibrated at --ref_batch_size)",
-                        default=20, type=int)
-    parser.add_argument("--learning_rate", help="Learning rate (calibrated at --ref_batch_size)",
-                        default=0.001, type=float)
-    parser.add_argument("--ref_batch_size", help="Reference batch size that --num_epochs / --learning_rate "
-                        "are tuned for; larger --batch_size is compensated relative to this",
-                        default=4096, type=int)
-    parser.add_argument("--no_batch_compensation", action="store_true",
-                        help="Disable the automatic epoch/lr scaling applied when batch_size > ref_batch_size")
+    parser.add_argument("--num_epochs", help="Number of training epochs", default=20, type=int)
+    parser.add_argument("--learning_rate", help="Learning rate", default=0.001, type=float)
     parser.add_argument("--eval_interval", help="Evaluation interval (in epochs)", default=10, type=int)
     parser.add_argument("--random_seed", help="random seed", default=52, type=int)
 
