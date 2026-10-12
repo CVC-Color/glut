@@ -1,13 +1,19 @@
+<div align="center">
+
 # GLUT: 3D Gaussian Lookup Table for Continuous Color Transformation
 
-
-[arXiv](https://arxiv.org/abs/2605.19889) &nbsp;|&nbsp; [Project Page](https://color.cvc.uab.cat/glut/) &nbsp;|&nbsp; [LUT editor](https://color.cvc.uab.cat/assets/html/glut_editor.html) 🎨
-
-
-### Neurips 2026
-[Danna Xue](https://dxue321.github.io/), [David Serrano-Lozano](https://davidserra9.github.io/), [Shaolin Su](https://ssl92.github.io/), and [Javier Vazquez-Corral](https://www.jvazquez-corral.net/)
+[Danna Xue](https://dxue321.github.io/), [David Serrano-Lozano](https://davidserra9.github.io/), [Shaolin Su](https://ssl92.github.io/), [Javier Vazquez-Corral](https://www.jvazquez-corral.net/)
 
 Computer Vision Center, Universitat Autònoma de Barcelona
+
+**NeurIPS 2026**
+
+[![Conference](https://img.shields.io/badge/NeurIPS-2026-4b44ce)](https://neurips.cc/)
+[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b)](https://arxiv.org/abs/2605.19889)
+[![Project Page](https://img.shields.io/badge/Project-Page-green)](https://color.cvc.uab.cat/glut/)
+[![LUT editor](https://img.shields.io/badge/Demo-GLUT_Editor-blue)](https://color.cvc.uab.cat/assets/html/glut_editor.html)
+
+</div>
 
 ## About
 
@@ -73,13 +79,13 @@ dataset/
 |- |- 📁 225luts/
 |- |- ...
 |- 📁 hald_images/
-|- |- 📁 7luts_train/                  # training set: one folder, many LUTs
-|  |  |- Original_Image.png          #   identity hald (the model input)
-|  |  |- 🖼️ LUT01.png                   #   target = LUT01 applied to Original_Image
+|- |- 📁 7luts_train/                # training set: one folder, many LUTs
+|  |  |- Original_Image.png           # identity hald (the model input)
+|  |  |- 🖼️ LUT01.png                # target = LUT01 applied to Original_Image
 |  |  |- 🖼️ LUT02.png
 |  |  |- ...
-|- |- 📁 7luts_test/                   # same LUT names, held-out hald resolution / crop
-|- |- 📁 75luts_train/                 # 75-LUT set used for the shipped checkpoint
+|- |- 📁 7luts_test/                 # same LUT names
+|- |- 📁 75luts_train/               # 75-LUT set used for the shipped checkpoint
 |- |- 📁 75luts_test/
 |- |- 📁 ...
 ```
@@ -210,15 +216,13 @@ Workflow:
 
 ## Citation
 
-Hope you like it 🤗 
-
-If you find this work interesting or you use it, don't forget to cite our work:
+🤗 If you find this work interesting or you use it, don't forget to cite our work:
 
 ```bibtex
-@article{xue2026glut,
+@inproceedings{xue2026glut,
   title={GLUT: 3D Gaussian Lookup Table for Continuous Color Transformation},
   author={Xue, Danna and Serrano-Lozano, David and Su, Shaolin and Vazquez-Corral, Javier},
-  journal={arXiv preprint arXiv:2605.19889},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
   year={2026}
 }
 ```
@@ -226,5 +230,4 @@ If you find this work interesting or you use it, don't forget to cite our work:
 ## Acknowledgements
 
 Thanks to the [NILUT](https://github.com/mv-lab/nilut) project for its code and data.
-
 
