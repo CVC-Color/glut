@@ -8,10 +8,10 @@ Computer Vision Center, Universitat Autònoma de Barcelona
 
 **NeurIPS 2026**
 
-[![Conference](https://img.shields.io/badge/NeurIPS-2026-4b44ce)](https://neurips.cc/)
+[![Conference](https://img.shields.io/badge/NeurIPS-2026-4b44ce)](https://neurips.cc/virtual/2026/loc/paris/poster/153974)
 [![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b)](https://arxiv.org/abs/2605.19889)
 [![Project Page](https://img.shields.io/badge/Project-Page-green)](https://color.cvc.uab.cat/glut/)
-[![LUT editor](https://img.shields.io/badge/Demo-GLUT_Editor-blue)](https://color.cvc.uab.cat/assets/html/glut_editor.html)
+[![LUT editor](https://img.shields.io/badge/Demo-GLUT_Editor-blue)](https://color.cvc.uab.cat/glut/glut_editor.html)
 
 </div>
 
